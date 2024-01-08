@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,5 +26,6 @@ namespace NewTaskyAPI.Shared
         [ForeignKey(nameof(OrganizationId))]
 
         public Guid OrganizationId { get; set; }
+
     }
 }

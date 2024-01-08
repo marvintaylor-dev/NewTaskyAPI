@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NewTaskyAPI.Shared;
+using System.Reflection.Emit;
 
 namespace NewTaskyAPI.Server.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
 
         protected readonly IConfiguration _configuration;
@@ -19,19 +21,14 @@ namespace NewTaskyAPI.Server.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-           
-
-            //builder.Entity<SprintModel>()
-            //    .HasMany(x => x.AssignedTasks)
-            //    .WithMany(x => x.AssignedToSprint);
-
             builder.Entity<SprintModel>()
                 .HasMany(s => s.MembersWithPlannedLeave)
                 .WithMany(s => s.SprintsAssignedTo);
 
             builder.Entity<TasksSprints>()
                 .HasKey(x => new { x.TaskId, x.SprintId });
-                
+
+            base.OnModelCreating(builder);
         }
 
         public DbSet<Epic> Epics { get; set; }
@@ -48,7 +45,7 @@ namespace NewTaskyAPI.Server.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<NoteModel> Tasks { get; set; }
         public DbSet<TasksSprints> TasksSprints { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<UserStory> UserStories { get; set; }
     }
 }

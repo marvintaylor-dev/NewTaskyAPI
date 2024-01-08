@@ -15,12 +15,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Microsoft.AspNetCore.Identity;
-using NewTaskyAPI.Server.Data.ProductGoalsRepository;
+using NewTaskyAPI.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//builder.Services.AddIdentityCore<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddIdentityCore<User>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddScoped<IProductGoalsRepository, ProductGoalsRepository>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
@@ -30,7 +32,7 @@ builder.Services.AddScoped<IEpicRepository, EpicRepository>();
 builder.Services.AddScoped<IStatusRepository, StatusRepository>();
 builder.Services.AddScoped<IEstimationRepository, EstimationRepository>();
 builder.Services.AddScoped<ISprintRepository,SprintRepository>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+//builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {

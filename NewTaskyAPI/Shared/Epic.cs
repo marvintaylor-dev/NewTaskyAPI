@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewTaskyAPI.Shared
-{
+{ 
     public class Epic
     {
         [Key]
@@ -16,6 +16,11 @@ namespace NewTaskyAPI.Shared
         public TagColor? EpicColor { get; set; } = TagColor.Default;
 
         public string EpicCategory { get; set; } = string.Empty;
+
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        //public User? CreatedBy { get; set; }
+        //public User? UpdatedBy { get; set; }
 
         //navigation property
         public IList<NoteModel>? UserStoriesInEpic { get; set; }

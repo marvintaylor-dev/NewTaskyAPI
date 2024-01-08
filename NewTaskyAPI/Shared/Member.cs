@@ -24,6 +24,10 @@ namespace NewTaskyAPI.Shared
         //public List<DateTime>? VacationDates { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Position { get; set; } = string.Empty;
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        //public User? CreatedBy { get; set; }
+        //public User? UpdatedBy { get; set; }
 
         public List<SprintModel>? SprintsAssignedTo { get; set; }
         public int WorkAssigned { get; set; } = 0;

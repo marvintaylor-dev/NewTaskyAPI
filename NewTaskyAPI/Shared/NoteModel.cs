@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.VisualBasic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
@@ -45,16 +46,6 @@ namespace NewTaskyAPI.Shared
 
         public int VisualHeightOfTask { get; set; } = 0;
 
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-
-        public DateTime DateCreated { get; set; } = DateTime.Now;
-        public DateTime? DateModified { get; set;} = DateTime.Now;
-
-        public DateTime? DateBeganProcess { get; set; }
-        public DateTime? DateItemLeftProcess { get; set; }
-
-
         [ForeignKey("StatusId")]
         public int? Status { get; set; }
 
@@ -74,6 +65,22 @@ namespace NewTaskyAPI.Shared
 
         public Guid OrganizationId { get; set; }
 
+        public bool? isDeleted { get; set; }
+
+        //For tracking an item's lifecycle from in progress to completed based on statuses on the kanban board
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+
+        //Different From Start Date/End Date because you may want to track from when an item was first created to when the item was delivered to a customer. 
+        public DateTime? DateBeganProcess { get; set; }
+        public DateTime? DateItemLeftProcess { get; set; }
+
+        public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+        public DateTime? DateModified { get; set; } = DateTime.UtcNow;
+
+        //public User? CreatedBy { get; set; }
+        //public User? UpdatedBy { get; set;}
+        //public User? DeletedBy { get; set; }
     }
 
 }
